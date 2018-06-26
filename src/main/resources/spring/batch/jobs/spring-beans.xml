@@ -7,9 +7,16 @@
    <batch:job id="helloWorldJob">
       <batch:step id="step1">
          <batch:tasklet>
-            <batch:chunk reader="cvsFileItemReader" writer="xmlItemWriter" processor="itemProcessor" commit-interval="10" />
+           <bean class="com.jcg.spring.batch.TableMetadataExtractor">
+               <property name="jdbcTemplate" ref="jdbcTemplate"/>
+           </bean>
          </batch:tasklet>
       </batch:step>
+      <!--<batch:step id="step2">
+         <batch:tasklet>
+            <batch:chunk reader="cvsFileItemReader" writer="xmlItemWriter" processor="itemProcessor" commit-interval="10" />
+         </batch:tasklet>
+      </batch:step>-->
    </batch:job>
 
    <bean id="tokenizer" class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
