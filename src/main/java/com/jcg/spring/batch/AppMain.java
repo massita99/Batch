@@ -20,7 +20,7 @@ public class AppMain {
 		contextObj = new ClassPathXmlApplicationContext(springConfig);
 		
 		jobObj = (Job) contextObj.getBean("helloWorldJob");
-		jobLauncherObj = (JobLauncher) contextObj.getBean("jobLauncher");		
+		jobLauncherObj = (JobLauncher) contextObj.getBean("jobLauncher");
 		try {
 			JobExecution execution = jobLauncherObj.run(jobObj, new JobParameters());
 			System.out.println("Exit Status : " + execution.getStatus());
