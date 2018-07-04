@@ -19,11 +19,11 @@ public class TableMetadataExtractor implements Tasklet {
 
 
     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
-        Map<String,Integer> tableColumnTypes = jdbcTemplate.query("Select * from cdi_buffer_ph where 1!=1", resultSet -> {
+        Map<String,String> tableColumnTypes = jdbcTemplate.query("Select * from cdi_buffer_ph where 1!=1", resultSet -> {
             ResultSetMetaData meta = resultSet.getMetaData();
-            Map<String,Integer> resultMap = new HashMap<>();
+            Map<String,String> resultMap = new HashMap<>();
             for (int i = 1; i<=meta.getColumnCount(); i++) {
-                resultMap.put(meta.getColumnName(i).toUpperCase(), meta.getColumnType(i));
+                resultMap.put(meta.getColumnName(i).toUpperCase(), meta.getColumnClassName(i));
             }
             return resultMap;
 

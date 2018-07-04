@@ -18,15 +18,17 @@ public class AppMain {
 		
 		// Loading The Bean Definition From The Spring Configuration File
 		contextObj = new ClassPathXmlApplicationContext(springConfig);
-		
-		jobObj = (Job) contextObj.getBean("helloWorldJob");
+ 		jobObj = (Job) contextObj.getBean("helloWorldJob");
 		jobLauncherObj = (JobLauncher) contextObj.getBean("jobLauncher");
 		try {
 			JobExecution execution = jobLauncherObj.run(jobObj, new JobParameters());
-			System.out.println("Exit Status : " + execution.getStatus());
+			System.out.println("Exit Status : " + execution.getStatus() + " " + execution.getExitStatus());
 		} catch (Exception exceptionObj) {
 			exceptionObj.printStackTrace();
 		}
 		System.out.println("Done");
+
+
+
 	}
 }
